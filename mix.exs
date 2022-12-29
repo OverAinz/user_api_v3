@@ -43,6 +43,8 @@ defmodule UserApiV3.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:cors_plug, "~> 1.2"},
+      {:guardian, "~> 2.3"},
+      {:argon2_elixir, "~> 2.0"},
     ]
   end
 
