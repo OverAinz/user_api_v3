@@ -45,6 +45,7 @@ defmodule UserApiV3.MixProject do
       {:cors_plug, "~> 1.2"},
       {:guardian, "~> 2.3"},
       {:argon2_elixir, "~> 2.0"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 
