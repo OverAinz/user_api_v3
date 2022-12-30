@@ -1,11 +1,11 @@
-defmodule Auth0 do
-  alias UserApìV3.Accounts.{Credentials, TokenResult}
+defmodule UserApiV3.Accounts.Auth0 do
+  alias UserApiV3.Accounts.{Credentials, TokenResult}
 
   import Base #Data encoding and decoding 16, 32 and 64... https://hexdocs.pm/elixir/1.1.0/Base.html
 
   require Logger #is useful for tracking when an event of interest happens in the app... https://hexdocs.pm/logger/1.9.0/Logger.html#content
 
-  @auth Application.fetch_env!(:auth0, :credentials)
+  @auth0 Application.fetch_env!(:auth0, :credentials)
 
   @spec sing_in(Credentials.t()) :: {:ok, TokenResult.t()} | {:error, String.t()}
   def sing_in(%Credentials{username: username, password: encoded_password})
@@ -20,6 +20,10 @@ defmodule Auth0 do
       |> HTTPoison.post(body, headers)
       |> response
       |> parse
+  end
+
+  defp build_url(%URI{} = url) do
+    url |> Map.put(:path, "/oauth/token") |> URI.to_string()
   end
 
   defp build_headers, do: ["Content-type": "application/json"]
@@ -44,7 +48,7 @@ defmodule Auth0 do
 
   defp response({:error, %{reason: reason}}), do: {:error, reason}
 
-  def parse({:ok, body}) do
+  defp parse({:ok, body}) do
     result =
       body
       |> Jason.decode!(keys: :atoms)

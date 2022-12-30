@@ -7,7 +7,7 @@ defmodule UserApiV3.Accounts.Credentials do
   @primary_key false
   embedded_schema do
     field :username, :string
-    field :passsword, :string
+    field :password, :string
   end
 
   @allowed_fields [:username, :password]

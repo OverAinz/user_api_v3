@@ -1,5 +1,5 @@
 defmodule UserApiV3Web.AuthView do
-  use UserApiV3, :view
+  use UserApiV3Web, :view
 
   def render("show.json", %{token_result: token_result}) do
     %{
